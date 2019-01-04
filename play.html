@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>新的力量</title>
+<link rel="stylesheet" href="css/wai.css" />
+<style>
+
+
+ *{
+ 	margin: 0px;
+ 	padding: 0px;
+ }
+body{
+	
+	background: url(img/f1c69f1dbdb9644d2fcdd1c4c8093a14.jpg) repeat center center;
+	
+}
+#glow {
+	 /*-webkit-animation: demo 12s ease ;*/
+	position: relative;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height:650px;
+  margin: auto;
+  /*display: block;*/
+  /*background: blue;*/
+}
+#glow p{
+	width: 100%;
+ 	 display: block;
+	font-size: 10px;
+  	color:transparent;
+  	text-shadow: 0 0 17px;
+}
+
+#glow p:nth-child(1) {
+  -webkit-animation: rglow 2s ease ;
+  position: absolute;
+  left:500px;	
+  top: 400px;
+}
+#glow p:nth-child(2) {
+  -webkit-animation: rglow 2s ease 2s;
+  position: absolute;
+  left:20px;
+  top: 40px;
+}
+#glow p:nth-child(3) {
+  -webkit-animation: rglow 2s ease 3s;
+  /*-webkit-animation-delay:5s;*/
+  position: absolute;
+  left: 800px;
+  top: 40px;
+}
+ #glow p:nth-child(4) {
+  -webkit-animation: rglow 2s ease 4s;
+  position: absolute;
+  left: 40px;
+  top: 500px;
+}
+#glow p:nth-child(5) {
+  -webkit-animation: rglow 2s ease 5s;
+  position: absolute;
+  left: 100px;
+  top: 400px;
+}
+#glow p:nth-child(6) {
+  -webkit-animation: rglow 2s ease 6s;
+  position: absolute;
+  left: 900px;
+  top: 50px;
+}
+#glow p:nth-child(7) {
+  -webkit-animation: rglow 2s ease 7s;
+  position: absolute;
+  left: 420px;
+  top: 350px;
+}
+#glow p:nth-child(8) {
+  -webkit-animation: rglow 2s ease 8s;
+  position: absolute;
+  left: 200px;
+  top: 20px;
+}
+#glow p:nth-child(9) {
+  -webkit-animation: rglow 2s ease 9s;
+  position: absolute;
+  left: 40px;
+  top: 100px;
+}
+#glow p:nth-child(10) {
+  -webkit-animation: rglow 2s ease 10s;
+  position: absolute;
+  left: 490px;
+  top: 600px;
+}
+#glow p:nth-child(11) {
+  -webkit-animation: rglow 2s ease 11s;
+  position: absolute;
+  left: 360px;
+  top: 200px;
+}
+#glow p:nth-child(12) {
+  -webkit-animation: rglow 2s ease 12s;
+  position: absolute;
+  left: 850px;
+  top: 400px;
+}
+  @-webkit-keyframes rglow {
+  0% {
+    color: rgb(89, 78, 24);
+     font-size:5px ;
+    text-shadow: 0 0 15px;
+  }
+  20% {
+    color: rgb(1, 78, 9);
+     font-size:10px;
+    text-shadow: 0 0 15px;
+  }
+  40% {
+    color: rgb(233, 54, 40);
+     font-size: 20px;
+    text-shadow: 0 0 15px;
+  }
+   60% {
+    color: red;
+     font-size: 40px;
+   
+    text-shadow: 0 0 15px;
+  }
+  100% {
+    color: white;
+     font-size: 80px;
+     left: 230px;
+            top:200px; 
+    text-shadow: 0 0 15px;
+  }
+  
+  }
+  .shape{
+  	-webkit-animation:demo 3s ease;
+  }
+ @-webkit-keyframes demo {
+  0% {
+    background-color: yellow;
+  }
+  20% {
+    background-color: deepskyblue;
+  }
+  40% {
+     background-color: palevioletred;
+  }
+   60% {
+   background-color: gold;
+  }
+  100% {
+    background-color: limegreen;
+  }
+  }
+ #myCanvas {  
+ 	margin: 0px;
+ 	padding: 0px;
+ 	/*-webkit-animation: demo 2s ease 12s;*/
+            height:700px;
+            width:1500px;  
+            /*display: block;*/ 
+            position: absolute;
+            left: 20px;
+            top:10px; 
+           
+            /*background:transparent;*/
+            /*background-color:aqua;*/  
+        }  
+        
+  </style>
+   <script type="text/javascript">  
+        var arr = [];//保存所有的XY坐标，只为验证。实际程序中可删除。  
+        var r =4;  
+        var radian;//弧度  
+        var i;  
+        var radianDecrement;//弧度增量  
+        var time = 10;//每个点之间的时间间隔  
+        var intervalId;  
+        var num = 360;//分割为 360 个点  
+        var startRadian = Math.PI;  
+        var ctx;  
+        var eleShape=document.getElementById("shape");
+        window.onload = function () {  
+        	
+            startAnimation();  
+            
+        }  
+        function startAnimation() {  
+            ctx = document.getElementById("myCanvas").getContext("2d");  
+            //让画布撑满整个屏幕，-20是滚动条的位置，需留出。如滚动条出现则会挤压画布。  
+            WINDOW_HEIGHT=document.documentElement.clientHeight;  
+            WINDOW_WIDTH=document.documentElement.clientWidth;  
+            ctx.width = WINDOW_WIDTH;  
+            ctx.heigh = WINDOW_HEIGHT; 
+           
+            drawHeart();  
+        }  
+  
+        function drawHeart() {  
+  
+            ctx.strokeStyle = "red";
+            
+            ctx.lineWidth = 2;//设置线的宽度  
+            
+            radian = startRadian;//弧度设为初始弧度  
+            radianDecrement = Math.PI / num * 2;  
+            ctx.moveTo(getX(radian), getY(radian));//移动到初始点  
+            i = 0;  
+            intervalId = setInterval("printHeart()", time);  
+        }  
+        //x = 16 sin^3 t, y = (13 cos t - 5 cos 2t - 2 cos 3t - cos 4t)  
+        function printHeart() {  
+            radian += radianDecrement;  
+            ctx.lineTo(getX(radian), getY(radian));//在旧点和新点之间连线  
+            //arr.push("X:" + getX(radian) + "<br/>Y:" + getY(radian) + "<br/>");  
+            i++;  
+            ctx.stroke();//画线  
+            if (i >= num) { 
+            	 ctx.fillStyle="red";
+            	ctx.fill();
+            	
+                clearInterval(intervalId);  
+                //document.getElementById("bs").innerHTML = arr.join("");//打印所有的XY坐标点。  
+            }  
+        }  
+        function getX(t) {//由弧度得到 X 坐标  
+            return 100 + r * (16 * Math.pow(Math.sin(t), 3));  
+        }  
+  
+        function getY(t) {//由弧度得到 Y 坐标  
+            return 50 - r * (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));  
+        }  
+    </script>   
+</head>
+<body>
+	<div style="font-size: 30px;"><a href="index.html">返回首页</a></div>
+  <div id="glow">
+  	 <canvas id="myCanvas">
+
+     </canvas>
+
+  	 <div id="shape" class="shape active"></div>
+  <p>我爱你</p>
+  <p>当山峰没有棱角的时候</p>
+  <p>当河水不再流</p>
+  <p>
+  	当天第化为乌有
+  </p>
+   
+  <p>我还是不能离开你</p>
+  <p>你是我的眷恋</p>
+  <p>你是我今生最大的眷恋</p>
+  <p>当日月部分</p>
+  <p>当海枯石烂</p>
+  <p>我也不能离你而去</p>
+  <p>啊啊啊。。</p>
+  <p>我真的爱你</p>
+  </div>
+  <audio src="source/music.mp3" controls autoplay="autoplay" loop>播放</audio>
+  <div id="wai">我是例外</div>
+
+  <script src="js/jquery-1.11.0.js"></script>
+  <script>
+//  if (document.location.search.match(/type=embed/gi)) {
+//    window.parent.postMessage('resize', "*");
+//  }
+  </script>
+</body>
+</html>

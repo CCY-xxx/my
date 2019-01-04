@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>小小记事本</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+<style>
+    .del{
+        text-decoration: line-through;
+        color:#cccccc !important;
+    }
+</style>
+</head>
+<body>
+<div id="app">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                   Todo
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        <h2 class="text-denger">
+                            亲，你有{{count}}件事要完成！
+                        </h2>
+                        <input type="text" class="form-control" placeholder="请输入事件。。。" v-model="title"
+                        @keyup.enter="add">
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            <li class="list-group-item" v-for="(todo,index) in filtertodos" :key="index"
+                            @dblclick="remember(todo)">
+                                <span :class="{del:todo.isSelected}" v-show="cur!==todo">
+                                        <input type="checkbox" v-model="todo.isSelected">{{todo.title}}
+                                </span>
+                                <input type="text" v-model="todo.title" v-show="cur==todo"
+                                @keyup.enter="cancel" @blur="cancel" v-focus>
+                                <button class="pull-right btn btn-danger btn-xs"
+                                @click="remove(todo)">&bigotimes;</button>
+
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="panel-footer">
+                        <ul class="nav nav-pills">
+                            <li role="presentation" :class="{active:hash==='all'}"><a href="#/all">全部任务</a></li>
+                            <li role="presentation" :class="{active:hash==='finish'}"><a href="#/finish">已完成</a></li>
+                            <li role="presentation" :class="{active:hash==='unfinish'}"><a href="#/unfinish">未完成</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script src="js/todo.js"></script>
+</body>
+</html>
